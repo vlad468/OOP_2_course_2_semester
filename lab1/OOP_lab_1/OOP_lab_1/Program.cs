@@ -400,12 +400,17 @@ class TOpMatrix : TMatrix
             return new TOpMatrix(0);
         }
         int size = a.size;
-        TOpMatrix res = new TOpMatrix(a.size);
+        TOpMatrix res = new TOpMatrix(size);
         for (int i = 0; i < size; i++)
         {
             for (int j = 0; j < size; j++)
             {
-                res.matrix[i, j] = a.matrix[i, j] * b.matrix[i, j];
+                res.matrix[i, j] = 0;
+
+                for (int k = 0; k < size; k++)
+                {
+                    res.matrix[i, j] += a.matrix[i, k] * b.matrix[k, j];
+                }
             }
         }
         return res;
